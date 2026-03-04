@@ -14,7 +14,7 @@ RewriteRule ^(.*)$ index.php [L,QSA]
 SetEnv WEBSAI_NAME "{{project_name}}"
 SetEnv WEBSAI_LOCAL "{{local_domain}}"
 SetEnv WEBSAI_PRODUCTION "{{production_domain}}"
-SetEnv WEBSAI_LANDING "public/default"
+SetEnv WEBSAI_LANDING "public/websai"
 SetEnv WEBSAI_AIMODEL "<ai_model>"
 SetEnv WEBSAI_AIKEY "<ai_key>"
 

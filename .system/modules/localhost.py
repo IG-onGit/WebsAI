@@ -73,6 +73,7 @@ class Localhost:
         cli.hint(f"MySQL: http://{self.domain}/phpmyadmin")
         print()
 
+        webbrowser.open(f"http://{self.domain}/phpmyadmin")
         webbrowser.open(f"http://{self.domain}")
 
         return True

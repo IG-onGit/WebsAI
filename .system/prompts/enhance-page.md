@@ -129,11 +129,11 @@ File names must be specified above the relevant code blocks with numeration like
 
 # Last code block
 
-N. "config.json" - This is the last file code block you must fill and return as JSON code block:
+N. "config.json" - This is the last (mandatory) file code block you must fill and return as JSON code block:
 {
     "page-name": Specified name of the page (e.g "home"),
-    "page-group": Specified group of the page (e.g "public", "private" or other), if not specified set "public",
-    "group-description": What does the detected page group means for the page (e.g "public - means that only unregistered users can access the page"),
+    "page-group": Specified group category of the page (e.g "public", "private" or other), if not specified set "public",
+    "group-description": What does the detected page group category means for the page (e.g "public - means that only unregistered users can access the page"),
     "composer-plugins": [
         PHP code required composer plugin to install (e.g "phpmailer/phpmailer"), if not required by PHP code leave it empty,
     ]

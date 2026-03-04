@@ -150,13 +150,12 @@ class Engine:
 
         styling = ""
         pages = self.__getProjectPages(True)
-        for page in pages:
-            if styling.strip() != "":
-                continue
-            file = f"{Engine.project}/{page}/style.css"
-            if not os.path.exists(file):
-                continue
-            styling = cli.read(file)
+        example = cli.selection("Select styling example", pages)
+
+        if example:
+            file = f"{Engine.project}/{example}/style.css"
+            if os.path.exists(file):
+                styling = cli.read(file)
 
         if styling.strip() == "":
             styling = "Styling not provided."
