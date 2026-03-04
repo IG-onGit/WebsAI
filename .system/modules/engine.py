@@ -26,7 +26,7 @@ class Engine:
         if not model:
             cli.error("AI model not specified")
             return False
-        if category not in ["create", "enhance", "fix", "remove"]:
+        if category not in ["complete", "create", "enhance", "fix", "remove"]:
             cli.error("Invalid category")
             return False
         if not task:
@@ -102,6 +102,46 @@ class Engine:
         pass
 
     ####################################################################################// Actions
+    def _complete_(self, prompt):
+        pages = Engine.handler.__class__.code(prompt)
+
+        cli.setLoad(len(pages), "Generating pages")
+        for each in pages:
+            parts = each.split(".")
+            if len(parts) != 3:
+                cli.addLoad(1)
+                continue
+            group, page, extension = parts
+            if not group or not page or page in ["README", "readme"] or extension != "md":
+                cli.addLoad(1)
+                continue
+            desc = self.__page__(
+                "Create new page, here is the description:\n\n" + pages[each]
+            )
+            self._page_(desc, group, page)
+            cli.addLoad(1)
+        cli.endLoad()
+
+        if "README.md" in pages and pages["README.md"].strip() != "":
+            Patch.add(Engine.project + "/README.md")
+            cli.write(Engine.project + "/README.md", pages["README.md"])
+
+        if "db.sql" in pages and pages["db.sql"].strip() != "":
+            sql_file = os.path.join(Engine.project, "db.sql")
+            cli.write(sql_file, pages["db.sql"])
+            cli.command("code " + sql_file, False, True)
+            if cli.selection("Confirm to update database", ["Go", "No"], True) == "Go":
+                cli.trace("Updating database")
+                DB.submit(pages["db.sql"])
+            os.remove(sql_file)
+
+        return True
+
+    def _page_(self, prompt, group, page):
+        code = Engine.handler.__class__.code(prompt)
+
+        return self.__codeEditor(group, page, code)
+
     def _create_(self, prompt):
         code = Engine.handler.__class__.code(prompt)
 
@@ -142,6 +182,56 @@ class Engine:
         return self.__codeEditor(parts[0], parts[1], code)
 
     ####################################################################################// Prompts
+    def __complete__(self, task):
+        base = self.__loadPrompt("complete-project")
+        if not base:
+            cli.error("Empty base prompt")
+            return ""
+
+        return self.__prompt(base, {"message": task})
+
+    def __page__(self, task):
+        base = self.__loadPrompt("complete-page")
+        if not base:
+            cli.error("Empty base prompt")
+            return ""
+
+        styling = ""
+        pages = self.__getProjectPages(True)
+        pages.remove("public/websai")
+        if len(pages) > 0:
+            file = f"{Engine.project}/{pages[0]}/style.css"
+            if os.path.exists(file):
+                styling = cli.read(file)
+
+        if styling.strip() == "":
+            styling = "Styling not provided."
+
+        files = []
+        for page in pages:
+            paths = self.__getFolderFiles(page)
+            if len(paths) > 0:
+                files.append(page + ":")
+            for file in paths:
+                files.append(f" - {file}")
+            if len(paths) > 0:
+                files.append("")
+        files = "\n".join(files)
+
+        schema = DB.schema()
+        if schema.strip() == "":
+            schema = "Schema not provided."
+
+        return self.__prompt(
+            base,
+            {
+                "database_schema": schema,
+                "files": files,
+                "styling": styling,
+                "message": task,
+            },
+        )
+
     def __create__(self, task):
         base = self.__loadPrompt("create-page")
         if not base:

@@ -105,22 +105,21 @@ App.call(page, method, data, code) - Call PHP backend methods;
 
 Generate following complete functional code blocks based on needs in this exact sequence:
 0. "readme.md" - separated Markdown code block (mandatory) - describing requested project's Goal, Functionality and Usage;
-1. "db.sql" - separated SQL code block if needed (skippable) - ready to execute in database;
-2. "page.html" - separated HTML code block if needed (skippable) - responsive structure without inline styles and scripts;
-3. "style.css" - separated CSS code block if needed (skippable) - responsive styles;
-4. "script.js" - separated jQuery JavaScript code block if needed (skippable) - handling complex actions;
-5. "code.php" - separated PHP code block (mandatory, even if no methods, class is required) - handling business logic;
+1. "page.html" - separated HTML code block if needed (skippable) - responsive structure without inline styles and scripts;
+2. "style.css" - separated CSS code block if needed (skippable) - responsive styles;
+3. "script.js" - separated jQuery JavaScript code block if needed (skippable) - handling complex actions;
+4. "code.php" - separated PHP code block (mandatory, even if no methods, class is required) - handling business logic;
 N. "..." - any other separated code block if needed - handling custom logic;
 
 File names must be specified above the relevant code blocks with numeration like this:
 ...
 
-1. db.sql
-```sql
-... sql code here ...
+0. readme.md
+```md
+... markdown code here ...
 ```
 
-2. page.html
+1. page.html
 ```html
 ... html code here ...
 ```

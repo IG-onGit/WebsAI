@@ -49,7 +49,7 @@ class index:
                     keys = re.findall(r"\{\{(.*?)\}\}", content)
                     for key in keys:
                         if key not in values:
-                            values[key] = cli.input(self.textify(key), True)
+                            values[key] = cli.input(self.__textify(key), True)
                     for key, val in values.items():
                         content = content.replace(f"{{{{{key}}}}}", val)
                     content = content.replace("<date_time>", utc_date)
@@ -141,6 +141,9 @@ class index:
                 "[Exit]": "exit",
             }
 
+            if not self.__developmentStarted():
+                options = {"Generate project": "complete", **options}
+
             if not option:
                 option = cli.selection("New request", list(options.keys()), True)
 
@@ -215,7 +218,56 @@ class index:
 
         return default
 
-    def textify(self, text):
+    def __textify(self, text):
         text = text.replace("_", " ")
 
         return text.capitalize()
+
+    def __developmentStarted(self):
+        pages = self.__getProjectPages()
+
+        return len(pages) > 0
+
+    def __getProjectPages(self):
+        groups = os.listdir(self.cwd)
+        if not groups:
+            return ""
+
+        skip = [
+            ".",
+            "..",
+            ".git",
+            ".env",
+            ".vscode",
+            "vendor",
+            "assets",
+            ".github",
+            ".gitlab",
+            ".gitignore",
+            ".htaccess",
+            "groups.php",
+            "index.php",
+            "LICENSE",
+            "README.md",
+            "robots.txt",
+            "sitemap.xml",
+            "composer.json",
+            "composer.lock",
+            # "",
+        ]
+
+        collect = []
+        for group in groups:
+            if not group or group in skip:
+                continue
+            path = os.path.join(self.cwd, group)
+            if not os.path.isdir(path):
+                continue
+            for page in os.listdir(path):
+                if not page or page in skip:
+                    continue
+                if group == "public" and page == "websai":
+                    continue
+                collect.append(f"{group}/{page}")
+
+        return collect

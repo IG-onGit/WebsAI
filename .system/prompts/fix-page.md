@@ -129,9 +129,9 @@ File names must be specified above the relevant code blocks with numeration like
 
 # Last code block
 
-N. "config.json" - This is the last (mandatory) file code block you must fill and return as JSON code block:
+N. "config.json" - This is the last (mandatory) file code block you must fill. Do not change this JSON data keys, you must set values for them and return as JSON code block:
 {
-    "page-name": Specified name of the page (e.g "home"),
+    "page-name": Specified name of the page (e.g "edititem"),
     "page-group": Specified group category of the page (e.g "public", "private" or other), if not specified set "public",
     "group-description": What does the detected page group category means for the page (e.g "public - means that only unregistered users can access the page"),
     "composer-plugins": [
@@ -151,7 +151,7 @@ These are rules to follow:
 - In jQuery JavaScript code always use JS method App.error|info|success(message) to display system messages on page;
 - In jQuery JavaScript code always use JS method App.call(request_url, php_method, data, code) to submit or retrieve data using PHP methods;
 - In jQuery JavaScript code App.call(...) usage example App.call("items", "getItems", {id: 3}, (echo)=>{ console.log(echo) });
-- PHP code is PHP class named with page name;
+- PHP code is PHP class named with page's name (e.g 'edititem', not 'EditItem', not 'edit_item', just 'edititem');
 - In PHP code each method has arguments ($post = [], $get = [], $files = []) that are passed from internal system, not from App.call(...) method;
 - In PHP code each JS App.call(...) callable method is public, other methods should be private helpers if needed used by public methods;
 - In PHP code each method is called via App.call(...) method from jQuery JavaScript code;
