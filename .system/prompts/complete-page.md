@@ -12,13 +12,11 @@ This is the existing database schema:
 [[files]]
 ```
 
-# Available CSS visual styling
+# Available CSS design example
 
 ```css
 [[styling]]
 ```
-
-If CSS styling is provided above - use similar visual styling of background, text and design for new CSS code block.
 
 # Available PHP methods
 
@@ -141,12 +139,15 @@ N. "config.json" - This is the last (mandatory) file code block you must fill. D
 # Rules to follow
 
 These are rules to follow:
+- Project pages are located via URL links just by using page names, without category names (e.g "/edititem", not "/public/edititem", not "/public/edititem/page.html");
 - Each code block should contain complete functional code;
 - In HTML code you can use font-awesome free icons if you need any;
 - In HTML code do not include links for font-awesome icons, jquery, css and js files!
 - In HTML code use '/assets/default.png' src if you need to add <img> tag;
 - In HTML code use '/assets/default.mp4' src if you need to add <video> tag;
 - In HTML code use '/assets/default.mp3' src if you need to add <audio> tag;
+- In CSS code you must style entire HTML page as requested;
+- If CSS design example is provided, create same CSS design for new HTML code (for the full page);
 - In jQuery JavaScript code always use JS method App.error|info|success(message) to display system messages on page;
 - In jQuery JavaScript code always use JS method App.call(request_url, php_method, data, code) to submit or retrieve data using PHP methods;
 - In jQuery JavaScript code App.call(...) usage example App.call("items", "getItems", {id: 3}, (echo)=>{ console.log(echo) });

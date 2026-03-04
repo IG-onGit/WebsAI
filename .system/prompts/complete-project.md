@@ -37,8 +37,9 @@ File names must be specified above the relevant code blocks with numeration like
 # Rules to follow
 
 These are rules to follow:
-- Category name name should be simple lowercase string (e.g "public")
-- Page name should be simple or joined lowercase string (e.g "edit" or "edititem")
+- Category name name should be simple lowercase string (e.g "public");
+- Page name should be simple or joined lowercase string (e.g "edit" or "edititem");
+- Project pages are located via URL links just by using page names, without category names (e.g "/edititem", not "public/edititem");
 - Each code block should contain complete functional logic;
 - Consider that website project pages will only be built using HTML, CSS, PHP, JavaScript jQuery and MySQL SQL;
 - Do not provide actual page codes, I need Markdown descriptions for each page!

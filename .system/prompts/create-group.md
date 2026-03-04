@@ -60,6 +60,7 @@ public static function public($post = [], $get = [], $files = [])
     // Check some stuff that will define access conditions.
     $conditions = true;
 
+    // Redirect directly to page name, no page category needed.
     if (!$conditions) App::redirect('landing');
 
     return true;
@@ -70,9 +71,10 @@ public static function public($post = [], $get = [], $files = [])
 # Rules to follow
 
 These are rules to follow:
+- Project pages are located via URL links just by using page names, without category names (e.g "edititem", not "public/edititem", not "public/edititem/page.html");
 - The PHP code block code should not be class or class with method inside;
 - Requested PHP method should only return true if conditions are met, or redirect to other page;
-- In PHP code block you can only use App::redirect(...) method if needed from App class;
+- In PHP code block you can only use App::redirect(pagename) method if needed from App class;
 - Requested PHP method represents access permission checking, true if allowed or redirect if conditions not met;
 - Requested PHP method should check for conditions that are described by provided description;
 - In PHP code block requested method must have arguments ($post = [], $get = [], $files = []) that are passed from internal system;
