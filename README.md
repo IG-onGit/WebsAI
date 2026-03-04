@@ -1,7 +1,7 @@
-# WebsAI v1.0.2
+# WebsAI v1.1.0
 
 **Project**: WebsAI
-<br>**Version**: 1.0.2
+<br>**Version**: 1.1.0
 <br>**OS**: OS Independent
 <br>**Author**: Irakli Gzirishvili
 <br>**Mail**: gziraklirex@gmail.com
