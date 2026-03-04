@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /assets/
+Disallow: /vendor/
+Allow: /
+
+Sitemap: https://{{production_domain}}/assets/sitemap.xml

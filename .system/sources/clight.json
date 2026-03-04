@@ -1,0 +1,13 @@
+{
+    "Name": "WebsAI",
+    "Version": "1.0.2",
+    "Description": "WebsAI is an AI-powered full-stack framework for fast and intelligent generation of non-standard simple web applications.",
+    "Link": "https://github.com/IG-onGit/WebsAI",
+    "CMD": "websai",
+    "Author": "Irakli Gzirishvili",
+    "Mail": "gziraklirex@gmail.com",
+    "Project Type": "App",
+    "Repository Type": "GitHub",
+    "License": "MIT License",
+    "Operating System": "OS Independent"
+}

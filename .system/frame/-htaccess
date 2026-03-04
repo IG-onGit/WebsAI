@@ -1,0 +1,27 @@
+# DO NOT TOUCH
+<IfModule mod_headers.c>
+    Header unset X-Powered-By
+</IfModule>
+ServerSignature Off
+Options -Indexes
+RewriteEngine on
+RewriteRule ^favicon.ico$ - [L,R=404]
+RewriteCond %{REQUEST_URI} ^/assets/.*\.(css|js|svg|woff|woff2|mp4|ogg|mp3|wav|jpeg|jpg|png|gif|svg|ico|webp|xml)$ [NC]
+RewriteRule .* - [L]
+RewriteRule ^(.*)$ index.php [L,QSA]
+
+# WebApp
+SetEnv WEBSAI_NAME "{{project_name}}"
+SetEnv WEBSAI_LOCAL "{{local_domain}}"
+SetEnv WEBSAI_PRODUCTION "{{production_domain}}"
+SetEnv WEBSAI_LANDING "public/default"
+SetEnv WEBSAI_AIMODEL "<ai_model>"
+SetEnv WEBSAI_AIKEY "<ai_key>"
+
+# WebApp Database
+SetEnv DB_HOST "{{database_host}}"
+SetEnv DB_NAME "{{database_name}}"
+SetEnv DB_USER "{{database_user}}"
+SetEnv DB_PASS "<database_pass>"
+
+# Project Variables
