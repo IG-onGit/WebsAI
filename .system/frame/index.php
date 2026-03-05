@@ -49,7 +49,7 @@ class DB
         try
         {
             $pdo = self::connect();
-            $sql = "DELETE FROM {$table} WHERE " . self::buildSQL($where);
+            $sql = "DELETE FROM {$table} WHERE " . self::buildSQL($where, ' and ');
             $stmt = $pdo->prepare($sql);
 
             foreach ($where_vars as $key => $value)
@@ -85,7 +85,7 @@ class DB
             }
 
             $setSQL = implode(', ', $setParts);
-            $whereSQL = self::buildSQL($where);
+            $whereSQL = self::buildSQL($where, ' and ');
             $sql = "UPDATE {$table} SET $setSQL WHERE $whereSQL";
             $stmt = $pdo->prepare($sql);
 
@@ -198,14 +198,14 @@ class DB
     /**
      * Converts SQL line array to string
      */
-    private static function buildSQL($lines = [])
+    private static function buildSQL($lines = [], $delimiter = ' ')
     {
         if (!is_array($lines) || empty($lines))
         {
             return '';
         }
 
-        return trim(implode(' ', $lines));
+        return trim(implode($delimiter, $lines));
     }
 }
 
@@ -232,6 +232,8 @@ class App
             self::$group = $default[0];
             self::$page = $default[1];
         }
+
+        $this->validateGroup();
 
         $request = $this->request();
         self::$post = $request['post'];
@@ -528,13 +530,6 @@ class App
             break;
         }
 
-        if (empty($group)) return '';
-
-        require_once 'groups.php';
-        if (!class_exists('Groups', false)) return '';
-        if (!method_exists('Groups', $group)) return $group;
-        if (!Groups::$group(self::$post, self::$get, self::$files)) return '';
-
         return $group;
     }
 
@@ -596,6 +591,19 @@ class App
             session_regenerate_id(true);
             $_SESSION['websai_session_time'] = time();
         }
+    }
+
+    private function validateGroup()
+    {
+        $group = self::$group;
+        if (empty($group)) return '';
+
+        require_once 'groups.php';
+        if (!class_exists('Groups', false)) return '';
+        if (!method_exists('Groups', $group)) return $group;
+        if (!Groups::$group(self::$post, self::$get, self::$files)) return '';
+
+        return self::$group;
     }
 }
 

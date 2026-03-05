@@ -41,7 +41,8 @@ These are rules to follow:
 - Page name should be simple or joined lowercase string (e.g "edit" or "edititem");
 - Project pages are located via URL links just by using page names, without category names (e.g "/edititem", not "public/edititem");
 - Each code block should contain complete functional logic;
-- Consider that website project pages will only be built using HTML, CSS, PHP, JavaScript jQuery and MySQL SQL;
+- Consider that website front-end will only be built using HTML, CSS, JavaScript and jQuery;
+- Consider that website back-end will only be built using PHP and SQL (for MySQL Database);
 - Do not provide actual page codes, I need Markdown descriptions for each page!
 - Do not create extra pages markdown codes that are not necessary for the project!
 - Do not create complex extra features and functionalities that  are not necessary for the project;

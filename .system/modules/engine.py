@@ -112,7 +112,12 @@ class Engine:
                 cli.addLoad(1)
                 continue
             group, page, extension = parts
-            if not group or not page or page in ["README", "readme"] or extension != "md":
+            if (
+                not group
+                or not page
+                or page in ["README", "readme"]
+                or extension != "md"
+            ):
                 cli.addLoad(1)
                 continue
             desc = self.__page__(
@@ -198,7 +203,10 @@ class Engine:
 
         styling = ""
         pages = self.__getProjectPages(True)
-        pages.remove("public/websai")
+
+        if "public/websai" in pages:
+            pages.remove("public/websai")
+
         if len(pages) > 0:
             file = f"{Engine.project}/{pages[0]}/style.css"
             if os.path.exists(file):

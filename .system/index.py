@@ -154,9 +154,9 @@ class index:
                 sys.exit()
 
             if task:
-                task += ".\n" + cli.input("Adjust")
+                task += ".\n" + self.__message("Adjust")
             else:
-                task = cli.input("Describe", True)
+                task = self.__message("Describe", True)
             print()
 
             model = self.__getEnv("websai_aimodel")
@@ -271,3 +271,11 @@ class index:
                 collect.append(f"{group}/{page}")
 
         return collect
+
+    def __message(self, hint="", must=False):
+        message = cli.input(hint, must)
+        if os.path.isfile(message) and os.path.exists(message):
+            cli.trace("Loading file: " + message)
+            message = cli.read(message)
+
+        return message

@@ -32,7 +32,9 @@ $rows = DB::query([
     'SELECT',
     '*',
     'FROM users',
-    'WHERE id = :id'
+    'WHERE',
+    'id = :id',
+    'and status = 1',
 ], [
     'id' => 5
 ]);

@@ -30,14 +30,14 @@ $id = DB::insert('users', [
 $result = DB::update(
     'users',
     ['name' => 'Mike'],
-    ['id = :id'],
+    ['id = :id', 'status = 1'],
     ['id' => 5]
 );
 
 // DB::delete($table='', $where=[], $where_vars=[]) - Deletes record where sql line conditions met - returns true or false;
 $result = DB::delete(
     'users',
-    ['id = :id'],
+    ['id = :id', 'status = 1'],
     ['id' => 5]
 );
 
@@ -46,7 +46,9 @@ $rows = DB::query([
     'SELECT',
     '*',
     'FROM users',
-    'WHERE id = :id'
+    'WHERE',
+    'id = :id',
+    'and status = 1',
 ], [
     'id' => 5
 ]);
