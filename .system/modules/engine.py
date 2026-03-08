@@ -611,6 +611,8 @@ class Engine:
         )
 
         for index, filename in enumerate(files, start=1):
+            if filename[:2] == "x.":
+                continue
             file_path = os.path.join(folder, filename)
             _, ext = os.path.splitext(filename)
             language = extension_map.get(ext.lower(), "")
