@@ -3,15 +3,28 @@ from imports import *
 
 class Gemini:
     ####################################################################################// Params
-    api_key = ""
     model = ""
     client = None
+    location = "us-central1"
 
     ####################################################################################// Load
-    def __init__(self, key, model):
-        Gemini.api_key = key
+    def __init__(self, key, model, project):
+        file = os.path.join(project, key)
+        account = json.loads(cli.read(file))
+
+        creds = service_account.Credentials.from_service_account_file(file)
+        scoped_creds = creds.with_scopes(
+            ["https://www.googleapis.com/auth/cloud-platform"]
+        )
+
         Gemini.model = model
-        Gemini.client = genai.Client()
+        Gemini.client = genai.Client(
+            vertexai=True,
+            project=account["project_id"],
+            location=Gemini.location,
+            credentials=scoped_creds,
+        )
+
         pass
 
     ####################################################################################// Main
@@ -52,7 +65,7 @@ class Gemini:
                 prompt=prompt,
                 config=types.GenerateImagesConfig(number_of_images=1),
             )
-            image_data = response.generated_images[0].image
+            image_data = response.generated_images[0].image.image_bytes
 
             with open(path, "wb") as f:
                 f.write(image_data)
@@ -71,7 +84,8 @@ class Gemini:
                 time.sleep(2)
                 op = Gemini.client.operations.get(op)
 
-            video_data = op.response.generated_videos[0].video
+            video_data = op.response.generated_videos[0].video.video_bytes
+
             with open(path, "wb") as f:
                 f.write(video_data)
             return path

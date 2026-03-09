@@ -5,7 +5,7 @@ class Openai:
     ####################################################################################// Params
 
     ####################################################################################// Load
-    def __init__(self, key, model):
+    def __init__(self, key, model, project):
         Openai.model = model
         Openai.client = OpenAIClient(api_key=key)
         pass

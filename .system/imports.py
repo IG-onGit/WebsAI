@@ -25,6 +25,7 @@ from anthropic import Anthropic
 from datetime import datetime, timezone
 from sqlalchemy.orm import sessionmaker
 from openai import OpenAI as OpenAIClient
+from google.oauth2 import service_account
 from sqlalchemy import create_engine, text
 
 from modules.localhost import Localhost

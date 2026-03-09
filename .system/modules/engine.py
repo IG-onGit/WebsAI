@@ -46,7 +46,7 @@ class Engine:
             return False
 
         obj = Engine(Engine.app, Engine.project, Engine.database)
-        Engine.handler = ProviderClass(key, model_name)
+        Engine.handler = ProviderClass(key, model_name, Engine.project)
         prompt_func_name = f"__{category}__"
         prompt_func = getattr(obj, prompt_func_name, None)
 

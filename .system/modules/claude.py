@@ -7,7 +7,7 @@ class Claude:
     model = None
 
     ####################################################################################// Load
-    def __init__(self, key, model):
+    def __init__(self, key, model, project):
         Claude.client = Anthropic(api_key=key)
         Claude.model = model
         pass

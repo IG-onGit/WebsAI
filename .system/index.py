@@ -81,10 +81,8 @@ class index:
                         # "claude/claude-haiku-4-5",
                         #
                         # NOW - Test and fix gemini API
-                        # "gemini/gemini-3.1-pro-preview",
-                        # "gemini/gemini-3-flash-preview",
-                        # "gemini/gemini-2.5-pro",
-                        # "gemini/gemini-2.5-flash",
+                        "gemini/gemini-2.5-pro",
+                        "gemini/gemini-2.5-flash",
                         #
                         # NOW - Test and fix grok API
                         # "grok/grok-4-1-fast-reasoning",

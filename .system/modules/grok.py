@@ -8,7 +8,7 @@ class Grok:
     base_url = ""
 
     ####################################################################################// Load
-    def __init__(Grok, key, model):
+    def __init__(Grok, key, model, project):
         Grok.key = key
         Grok.model = model
         Grok.base_url = "https://api.x.ai/v1"
