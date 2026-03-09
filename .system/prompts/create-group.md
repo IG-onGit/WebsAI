@@ -52,7 +52,8 @@ sql statements and code can have vars like this '... id = :id';
 
 # Required code block example
 
-File name must be specified above of the code block with "0" numeration like this:
+Each code block MUST have file name specified above the code block;
+File name MUST be specified above of the code block with "0" numeration like this:
 ...
 
 0. function.php

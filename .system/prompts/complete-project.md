@@ -14,7 +14,8 @@ You can use page categories like "public" (e.g public/page_name.md), "private" (
 First you should generate "db.sql" if database is needed for user requested project;
 Then you must generate only the necessary pages, to meet reuqsted project's complete functionality with clean and constructive strategy!
 
-File names must be specified above the relevant code blocks with numeration like this:
+Each code block MUST have file name specified above the code block;
+File names MUST be specified above the relevant code blocks with numeration like this:
 ...
 
 0. README.md

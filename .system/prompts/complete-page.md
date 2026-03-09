@@ -111,7 +111,8 @@ Generate following complete functional code blocks based on needs in this exact 
 4. "code.php" - separated PHP code block (mandatory, even if no methods, class is required) - handling business logic;
 N. "..." - any other separated code block if needed - handling custom logic;
 
-File names must be specified above the relevant code blocks with numeration like this:
+Each code block MUST have file name specified above the code block;
+File names MUST be specified above the relevant code blocks with numeration like this:
 ...
 
 0. readme.md
