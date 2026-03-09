@@ -36,27 +36,21 @@ class Gemini:
         return response.text
 
     def code(prompt):
-        resp = Gemini.client.models.generate_content(
-            model=Gemini.model, contents=prompt
-        )
-        text = resp.text
-        files = []
-        current_file = None
-        buffer = []
+        files = {}
 
-        for line in text.splitlines():
-            if line.startswith("```"):
-                if current_file is None:
-                    current_file = "code"
-                    buffer = []
-                else:
-                    files.append({current_file: "\n".join(buffer)})
-                    current_file = None
-            else:
-                if current_file is not None:
-                    buffer.append(line)
+        try:
+            resp = Gemini.client.models.generate_content(
+                model=Gemini.model, contents=prompt
+            )
+            pattern = r"\d+\.\s+([^\n]+)\s*\n```(?:[a-zA-Z0-9]+)?\n(.*?)```"
+            matches = re.findall(pattern, resp.text, re.DOTALL)
 
-        return files
+            for filename, content in matches:
+                files[filename.strip()] = content.replace("—", "-").strip()
+            return files
+        except Exception:
+            return {}
+        return {}
 
     def image(prompt, path):
         try:
